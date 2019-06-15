@@ -39,7 +39,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
         'together to a single function.'
     )
   }
-
+  // 传入两个参数的时候，并且第二个参数的是 function，其输入参数的含义为 (reducer, enhancer)
   if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
     enhancer = preloadedState
     preloadedState = undefined
@@ -49,10 +49,10 @@ export default function createStore(reducer, preloadedState, enhancer) {
     if (typeof enhancer !== 'function') {
       throw new Error('Expected the enhancer to be a function.')
     }
-
+    // 使用 enhancer 对 createStore 功能进行加强
     return enhancer(createStore)(reducer, preloadedState)
   }
-
+  
   if (typeof reducer !== 'function') {
     throw new Error('Expected the reducer to be a function.')
   }
